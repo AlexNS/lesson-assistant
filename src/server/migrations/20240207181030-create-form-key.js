@@ -2,36 +2,37 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Student', {
+    await queryInterface.createTable('FormKey', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      firstName: {
+      key: {
         type: Sequelize.STRING(100),
         allowNull: false
       },
-      middleName: {
-        type: Sequelize.STRING(100),
-        allowNull: true
-      },
-      lastName: {
-        type: Sequelize.STRING(100),
-        allowNull: false
-      },
-      email: {
-        type: Sequelize.STRING(300),
-        allowNull: false
-      },
-      photo: {
-        type: Sequelize.STRING(300),
-        allowNull: true
-      },
-      courseId: {
+      form_type: {
         type: Sequelize.INTEGER,
-        references: { model: 'Course', key: 'id' },
+        allowNull: false
+      },
+      entityId: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+      },
+      qr_path: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
+      active: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: true,
+        allowNull: false
+      },
+      createdByUserId: {
+        type: Sequelize.INTEGER,
+        references: { model: 'User', key: 'id' },
         allowNull: false
       },
       createdAt: {
@@ -45,6 +46,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Student');
+    await queryInterface.dropTable('FormKey');
   }
 };

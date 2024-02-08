@@ -8,7 +8,7 @@ module.exports = {
   async up (queryInterface, Sequelize) {
     const phash = await bcrypt.hash('admin', saltRounds);
 
-    await queryInterface.bulkInsert('Users', [{
+    await queryInterface.bulkInsert('User', [{
          firstName: 'Alex',
          lastName: 'S',
          login: 'alex',
@@ -20,6 +20,6 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('Users', null, {});
+    await queryInterface.bulkDelete('User', null, {});
   }
 };

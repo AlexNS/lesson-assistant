@@ -14,11 +14,26 @@ export default (sequelize, DataTypes) => {
     }
   }
   Student.init({
-    firstName: DataTypes.STRING(100),
-    middleName: DataTypes.STRING(100),
-    lastName: DataTypes.STRING(100),
-    email: DataTypes.STRING(300),
-    photo: DataTypes.STRING(300),
+    firstName: {
+      type: DataTypes.STRING(100),
+      allowNull: false
+    },
+    middleName: {
+      type: DataTypes.STRING(100),
+      allowNull: true
+    },
+    lastName: {
+      type: DataTypes.STRING(100),
+      allowNull: false
+    },
+    email: {
+      type: DataTypes.STRING(300),
+      allowNull: false
+    },
+    photo: {
+      type: DataTypes.STRING(300),
+      allowNull: true
+    },
     courseId: {
       type: DataTypes.INTEGER,
       references: {

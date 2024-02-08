@@ -14,7 +14,10 @@ export default (sequelize, DataTypes) => {
     }
   }
   Course.init({
-    name: DataTypes.STRING(100),
+    name: {
+      type: DataTypes.STRING(100),
+      allowNull: false
+    },
   }, {
     sequelize,
     modelName: 'Course',

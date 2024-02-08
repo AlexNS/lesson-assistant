@@ -1,0 +1,90 @@
+<main className="mt-0 transition-all duration-200 ease-soft-in-out">
+  <div class="w-full flex justify-center">
+    <form id="register-form" method="POST" enctype="multipart/form-data">
+      <div
+        class="relative flex flex-col break-words bg-white border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border m-4 p-8 max-w-lg"
+      >
+        <h1 class="mb-6">Регистрация на курсе <%= courseName %></h1>
+
+        <input
+          type="text"
+          class="default-input mb-4"
+          placeholder="Имя"
+          name="firstName"
+          required
+        />
+
+        <input
+          type="text"
+          class="default-input mb-4"
+          placeholder="Фамилия"
+          name="lastName"
+          required
+        />
+
+        <input
+          type="text"
+          class="default-input mb-4"
+          placeholder="Отчество"
+          name="middleName"
+        />
+
+        <input
+          type="email"
+          class="default-input mb-1"
+          placeholder="Email в домене sfedu"
+          name="email"
+          required
+        />
+        <p class="text-xs mb-4">
+          Обратите внимание на правильность указания email, так как в дальнейшем
+          именно email будет использоваться для вашей идентификации.
+        </p>
+
+        <p>Загрузите своё селфи</p>
+        <input
+          type="file"
+          class="mb-1"
+          placeholder="Селфи"
+          accept="image/png, image/jpeg"
+          name="selfie"
+        />
+        <p class="text-xs mb-4">
+          Селфи поможет преподавателю лучше вас запомнить и будет отображаться
+          только в интерфейсе преподавателя. Если уж совсем не хочется загружать
+          своё фото, можете загрузить аватарку (но как вы понимаете, это уже
+          будет не совсем то). Ну или вообще ничего не загружать...
+        </p>
+        <button type="submit" class="btn-primary">Регистрация</button>
+      </div>
+    </form>
+  </div>
+</main>
+<script>
+  const form = document.getElementById("register-form");
+  form.addEventListener("submit", (e) => {
+    function noSubmit() {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+    }
+
+    if (!form.checkValidity()) {
+      return noSubmit();
+    }
+
+    const emailElement = form.querySelector('input[name="email"]');
+    if (emailElement?.value) {
+        if (!/.*\@sfedu\.ru$/.test(emailElement.value)) {
+            alert('Email должен быть в домене sfedu.ru');
+            return noSubmit();
+        }
+    }
+
+    const selfieElement = form.querySelector('input[name="selfie"]');
+    if (selfieElement?.files?.length != 1) {
+      if (!confirm("Вы точно хотите отправить форму без селфи?")) {
+        return noSubmit();
+      }
+    }
+  });
+</script>
