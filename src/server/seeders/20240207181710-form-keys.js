@@ -18,10 +18,19 @@ module.exports = {
      if (userId && courseId) {
         await queryInterface.bulkInsert('FormKey', [{
           key: '123',
-          form_type: 1,
+          formType: 1,
           entityId: courseId,
           active: true,
-          qr_path: 'test',
+          qrPath: 'test',
+          createdByUserId: userId,
+          createdAt: new Date(),
+          updatedAt: new Date()
+        }, {
+          key: '3',
+          formType: 2,
+          entityId: courseId,
+          active: true,
+          qrPath: 'test',
           createdByUserId: userId,
           createdAt: new Date(),
           updatedAt: new Date()

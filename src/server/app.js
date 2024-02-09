@@ -8,6 +8,7 @@ import { fileURLToPath } from 'url';
 import defaultRoutes from './routes/defaultRoutes.js';
 import adminRoutes from  './routes/adminRoutes.js';
 import registerRoutes from './routes/registerRoutes.js';
+import questionRoutes from './routes/questionRoutes.js';
 
 import { UploadPath } from './config/config.js';
 
@@ -26,5 +27,6 @@ app.set('views', path.join(__dirname, '/views'));
 app.use(defaultRoutes);
 app.use(adminRoutes);
 app.use(registerRoutes);
+app.use(questionRoutes);
 
 export default app;

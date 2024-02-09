@@ -2,38 +2,26 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('FormKey', {
+    await queryInterface.createTable('Question', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      key: {
-        type: Sequelize.STRING(100),
-        allowNull: false
+      text: {
+        type: Sequelize.TEXT,
+        allowNull: false,
       },
-      formType: {
+      courseId: {
         type: Sequelize.INTEGER,
+        references: { model: 'Course', key: 'id' },
         allowNull: false
       },
-      entityId: {
-        type: Sequelize.INTEGER,
-        allowNull: false
-      },
-      qrPath: {
-        type: Sequelize.STRING(100),
-        allowNull: true
-      },
-      active: {
+      resolved: {
         type: Sequelize.BOOLEAN,
-        defaultValue: true,
-        allowNull: false
-      },
-      createdByUserId: {
-        type: Sequelize.INTEGER,
-        references: { model: 'User', key: 'id' },
-        allowNull: false
+        allowNull: false,
+        defaultValue: false
       },
       createdAt: {
         allowNull: false,
@@ -46,6 +34,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('FormKey');
+    await queryInterface.dropTable('Question');
   }
 };

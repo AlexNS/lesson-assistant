@@ -1,22 +1,9 @@
 import Models from '../models/index.js';
-
-async function getCourseByFormKey(formKeyString) {
-    const formKey = await Models.FormKey.findOne({ where: {
-            key: formKeyString,
-            active: true
-        } 
-    });
-
-    if (formKey && formKey.form_type==1) {
-        return await Models.Course.findByPk(formKey.entityId);
-    }
-
-    return null;
-}
+import { getCourseByFormKey, FormTypes } from '../services/formKeysService.js';
 
 export async function index(req, res) {
     const formKeyString = req.params['key'];
-    const course = await getCourseByFormKey(formKeyString);
+    const course = await getCourseByFormKey(formKeyString, FormTypes.REGISTER);
 
     if (course) {
         res.render('register', { title: course.name, layout: './layouts/main', courseName: course.name })
@@ -27,7 +14,7 @@ export async function index(req, res) {
 
 export async function register(req, res) {
     const formKeyString = req.params['key'];
-    const course = await getCourseByFormKey(formKeyString);
+    const course = await getCourseByFormKey(formKeyString, FormTypes.REGISTER);
     
     if (!course) {
         res.sendStatus(404);

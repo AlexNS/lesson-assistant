@@ -1,0 +1,21 @@
+<main className="mt-0 transition-all duration-200 ease-soft-in-out">
+  <div class="w-full flex justify-center">
+    <form id="register-form" method="POST">
+      <div
+        class="relative flex flex-col break-words bg-white border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border m-4 p-8 max-w-lg"
+      >
+        <h1 class="mb-6">Вопрос преподавателю по курсу <%= courseName %></h1>
+        <p>Текст вопроса</p>
+        <textarea
+          class="default-input mb-4"
+          name="questionText"
+          required
+        ></textarea>
+        <p class="text-xs mb-4">
+          Вопросы полностью анонимные. Никакая информация об отправляющем запрос пользователе или устройстве не записывается.
+        </p>
+        <button type="submit" class="btn-primary">Задать вопрос</button>
+      </div>
+    </form>
+  </div>
+</main>
