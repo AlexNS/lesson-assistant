@@ -1,5 +1,5 @@
 import {Router} from "express";
-import {index, register, thanks} from '../controllers/registerController.js'
+import {index, register, thanks} from '../controllers/register-controller.js'
 import upload from "../middlewares/upload.js";
 
 const router = Router();

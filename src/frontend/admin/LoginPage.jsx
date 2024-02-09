@@ -1,7 +1,7 @@
 import { useState } from "react";
 import backImage from './assets/curved6.jpg';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginUser } from "./features/auth/authSliceActions";
+import { loginUser } from "./features/auth/auth-slice-actions";
 
 export default function LoginPage() {
     const { pending } = useSelector(

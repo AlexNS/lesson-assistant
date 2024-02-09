@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { loginUser } from './authSliceActions'
+import { loginUser } from './auth-slice-actions'
 
 const initialState = {
   pending: false,

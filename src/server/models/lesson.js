@@ -1,9 +1,9 @@
 'use strict';
 import { Model } from 'sequelize';
-import User from './User.js';
+import Course from './course.js';
 
 export default (sequelize, DataTypes) => {
-  class FormKey extends Model {
+  class Lesson extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -13,33 +13,31 @@ export default (sequelize, DataTypes) => {
       // define association here
     }
   }
-  FormKey.init({
-    key: DataTypes.STRING(100),
-    formType: {
-      type: DataTypes.INTEGER,
+  Lesson.init({
+    title: {
+      type: DataTypes.STRING(300),
       allowNull: false
     },
-    entityId: {
-      type: DataTypes.INTEGER,
+    date: {
+      type: DataTypes.DATE,
       allowNull: false
     },
-    qrPath: {
-      type: DataTypes.STRING(100),
-      allowNull: true
+    courseId: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: Course,
+        key: 'id',
+      }
     },
-    active: {
+    resolved: {
       type: DataTypes.BOOLEAN,
-      allowNull: false
-    },
-    createdByUserId: {
-      type: DataTypes.INTEGER,
-      references: { model: User, key: 'id' },
-      allowNull: false
+      allowNull: false,
+      defaultValue: false
     }
   }, {
     sequelize,
-    modelName: 'FormKey',
+    modelName: 'Lesson',
     freezeTableName: true
   });
-  return FormKey;
+  return Lesson;
 };

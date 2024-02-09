@@ -1,5 +1,5 @@
 import Models from '../models/index.js'
-import { getCourseByFormKey, FormTypes } from '../services/formKeysService.js';
+import { getCourseByFormKey, FormTypes } from '../services/form-keys-service.js';
 
 export async function index(req, res) {
     const formKeyString = req.params['key'];
