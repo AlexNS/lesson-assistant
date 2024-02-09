@@ -12,8 +12,11 @@ import CourseModule from './Course.js';
 import StudentModule from './Student.js';
 import FormKeyModule from './FormKey.js';
 import QuestionModule from './Question.js';
+import LessonModule from './Lesson.js';
+import AttendanceSubmissionModule from './AttendanceSubmission.js';
 
-[UserModule, CourseModule, StudentModule, FormKeyModule, QuestionModule].forEach((mod) => {
+[UserModule, CourseModule, StudentModule, LessonModule,
+  FormKeyModule, QuestionModule, AttendanceSubmissionModule].forEach((mod) => {
   const model = mod(sequelize, Sequelize.DataTypes);
   db[model.name] = model;
 })
