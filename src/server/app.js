@@ -5,10 +5,11 @@ import bodyParser from 'body-parser';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-import defaultRoutes from './routes/defaultRoutes.js';
-import adminRoutes from  './routes/adminRoutes.js';
-import registerRoutes from './routes/registerRoutes.js';
-import questionRoutes from './routes/questionRoutes.js';
+import defaultRoutes from './routes/default-routes.js';
+import adminRoutes from  './routes/admin-routes.js';
+import registerRoutes from './routes/register-routes.js';
+import questionRoutes from './routes/question-routes.js';
+import attendanceRoutes from './routes/attendance-routes.js'
 
 import { UploadPath } from './config/config.js';
 
@@ -28,5 +29,6 @@ app.use(defaultRoutes);
 app.use(adminRoutes);
 app.use(registerRoutes);
 app.use(questionRoutes);
+app.use(attendanceRoutes);
 
 export default app;

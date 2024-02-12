@@ -1,0 +1,43 @@
+<main className="mt-0 transition-all duration-200 ease-soft-in-out">
+  <div class="w-full flex justify-center">
+    <form id="attendance-form" method="POST">
+      <div
+        class="relative flex flex-col break-words bg-white border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border m-4 p-8 max-w-lg"
+      >
+        <h1 class="mb-6">Отметка присутствия на занятии</h1>
+        <input type="email" name="email" placeholder="Ваш email" required />
+        <input type="hidden" name="geoData" />
+        <input type="hidden" name="visitorId" />
+        <p class="text-xs mb-4">
+          Идентификация происходит только по email. При отправке записывается ваша геолокация.
+        </p>
+        <button type="submit" class="btn-primary">Отправить отметку</button>
+      </div>
+    </form>
+  </div>
+</main>
+<script src="/utils.js"></script>
+<script>
+  (async () => {
+    const formElement = document.getElementById('attendance-form');
+    const emailElement = formElement.querySelector('[name=email]');
+    emailElement.value = LaUtils.getEmailFromStorage();
+
+    formElement.addEventListener('submit', (e) => {
+      if (!LaUtils.isSfeduEmail(emailElement.value)) {
+          alert('Email должен быть в домене sfedu.ru');
+          return LaUtils.noSubmit(e);
+      }
+    });
+
+    const visitorIdElement = formElement.querySelector('[name=visitorId]');
+    visitorIdElement.value = await LaUtils.getVisitorIdAsync();
+
+    try {
+      const position = await LaUtils.getGeoPositionAsync();
+      formElement.querySelector('[name=geoData]').value = JSON.stringify(position);
+    } catch(err) {
+      console.error(err);
+    }
+  })().then();
+</script>

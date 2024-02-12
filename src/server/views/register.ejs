@@ -60,30 +60,26 @@
     </form>
   </div>
 </main>
+<script src="/utils.js"></script>
 <script>
   const form = document.getElementById("register-form");
   form.addEventListener("submit", (e) => {
-    function noSubmit() {
-      e.preventDefault();
-      e.stopImmediatePropagation();
-    }
-
     if (!form.checkValidity()) {
-      return noSubmit();
+      return LaUtils.noSubmit(e);
     }
 
     const emailElement = form.querySelector('input[name="email"]');
     if (emailElement?.value) {
-        if (!/.*\@sfedu\.ru$/.test(emailElement.value)) {
+        if (!LaUtils.isSfeduEmail(emailElement.value)) {
             alert('Email должен быть в домене sfedu.ru');
-            return noSubmit();
+            return LaUtils.noSubmit(e);
         }
     }
 
     const selfieElement = form.querySelector('input[name="selfie"]');
     if (selfieElement?.files?.length != 1) {
       if (!confirm("Вы точно хотите отправить форму без селфи?")) {
-        return noSubmit();
+        return LaUtils.noSubmit(e);
       }
     }
   });

@@ -1,6 +1,6 @@
 'use strict';
 import { Model } from 'sequelize';
-import Course from './Course.js';
+import Course from './course.js';
 
 export default (sequelize, DataTypes) => {
   class Question extends Model {

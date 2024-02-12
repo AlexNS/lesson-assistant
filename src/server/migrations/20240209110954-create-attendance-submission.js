@@ -20,7 +20,7 @@ module.exports = {
       },
       geoData: {
         type: Sequelize.STRING(200),
-        allowNull: false
+        allowNull: true
       },
       lessonId: {
         type: Sequelize.INTEGER,

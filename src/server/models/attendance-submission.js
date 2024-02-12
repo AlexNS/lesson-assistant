@@ -28,7 +28,7 @@ export default (sequelize, DataTypes) => {
     },
     geoData: {
       type: DataTypes.STRING(200),
-      allowNull: false
+      allowNull: true
     },
     lessonId: {
       type: DataTypes.INTEGER,
