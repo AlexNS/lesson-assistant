@@ -8,6 +8,11 @@ export const DbConfig = {
     dialect: process.env['DB_DIALECT'] ?? 'postgres',
 }
 
+export const AuthConfig = {
+    saltRounds: process.env['SALT_ROUNDS'] ?? 5,
+    jwtSecret: process.env['JWT_SECRET'] ?? 'hello'
+}
+
 export const UploadPath = process.env['UPLOAD_PATH'] ?? './uploads';
 
 

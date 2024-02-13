@@ -8,9 +8,9 @@ import CoursesScreen from './components/courses-screen/CoursesScreen';
 import StudentsScreen from './components/students-screen/StudentsScreen';
 
 export default function App() {
-  const { userInfo } = useSelector((state) => state.auth);
+  const { userToken } = useSelector((state) => state.auth);
 
-  if (!userInfo) {
+  if (!userToken) {
     return ( 
       <LoginPage/>
     );

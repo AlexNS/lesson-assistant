@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 
-const backendURL = 'http://127.0.0.1:3000'
+const backendURL = ''
 
 export const loginUser = createAsyncThunk(
   'auth/login',
@@ -9,14 +9,16 @@ export const loginUser = createAsyncThunk(
     try {
       const config = {
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/x-www-form-urlencoded',
         },
       }
-      await axios.post(
+      const response = await axios.post(
         `${backendURL}/api/login`,
         { login, password },
         config
-      )
+      );
+
+      return response.data;
     } catch (error) {
     // return custom error message from backend if present
       if (error.response && error.response.data.message) {
