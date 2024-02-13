@@ -82,5 +82,9 @@
         return LaUtils.noSubmit(e);
       }
     }
+
+    if (emailElement?.value) {
+      LaUtils.saveEmailInStorage(emailElement?.value);
+    }
   });
 </script>

@@ -28,6 +28,10 @@
           alert('Email должен быть в домене sfedu.ru');
           return LaUtils.noSubmit(e);
       }
+
+      if (emailElement?.value) {
+        LaUtils.saveEmailInStorage(emailElement?.value);
+      }
     });
 
     const visitorIdElement = formElement.querySelector('[name=visitorId]');
