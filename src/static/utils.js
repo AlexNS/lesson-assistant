@@ -40,7 +40,7 @@ class Utils {
             return Promise.resolve(this.visitorId);
         } 
 
-        return import('/fp.js')
+        return import('/a/fp.js')
             .then(FingerprintJS => FingerprintJS.load())
             .then(fp => fp.get())
             .then(result => {

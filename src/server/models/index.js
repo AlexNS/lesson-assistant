@@ -5,8 +5,14 @@ import { DbConfig } from '../config/config.js';
 
 const db = {};
 
-const sequelize = new Sequelize(DbConfig.database, DbConfig.username, DbConfig.password, DbConfig);
-
+const sequelize = new Sequelize({
+  host: DbConfig.hostname,
+  database: DbConfig.database,
+  username: DbConfig.username,
+  password: DbConfig.password,
+  dialect: DbConfig.dialect
+});
+  
 import UserModule from './user.js';
 import CourseModule from './course.js';
 import StudentModule from './student.js';
