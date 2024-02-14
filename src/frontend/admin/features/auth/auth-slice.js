@@ -12,7 +12,13 @@ const initialState = {
 const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
+  reducers: {
+    logout(state) {
+      state.userToken = null;
+      state.userInfo = null;
+      state.success = false;
+    }
+  },
   extraReducers: builder => {
     builder
       .addCase(loginUser.pending, (state, action) => {

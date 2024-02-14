@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { createAsyncThunk } from '@reduxjs/toolkit'
+import { createAsyncThunk, createAction } from '@reduxjs/toolkit'
 
 const backendURL = ''
 
@@ -28,4 +28,6 @@ export const loginUser = createAsyncThunk(
       }
     }
   }
-)
+);
+
+export const logoutUser = createAction('auth/logout');

@@ -1,9 +1,17 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Breadcrumbs from "./Breadcrumbs";
+import { logoutUser } from '../../features/auth/auth-slice-actions';
 
 export default function Navbar() {
     const { userInfo } = useSelector((state) => state.auth);
     const fullname = [userInfo.firstName, userInfo.middleName, userInfo.lastName].filter(x=>x).join(' ');
+
+    const dispatch = useDispatch();
+
+    function handleOnLogoutClick() {
+      dispatch(logoutUser());
+    }
+
     return (
         <nav className="relative flex flex-wrap items-center justify-between px-0 py-2 mx-6 transition-all shadow-none duration-250 ease-soft-in rounded-2xl lg:flex-nowrap lg:justify-start" 
             navbar-scroll="true">
@@ -15,6 +23,12 @@ export default function Navbar() {
                   <a href="#" className="block px-0 py-2 font-semibold transition-all ease-nav-brand text-sm text-slate-500">
                     <i className="fa fa-user sm:mr-1 text-slate-500"></i>
                     <span className="sm:inline">{fullname}</span>
+                  </a>
+                </li>
+                <li className="flex items-center">
+                  <a onClick={handleOnLogoutClick} className="block ml-10 px-0 py-2 font-semibold transition-all ease-nav-brand text-sm text-slate-500">
+                    <i className="fa fa-user sm:mr-1 text-slate-500"></i>
+                    <span className="sm:inline">Выход</span>
                   </a>
                 </li>
               </ul>
