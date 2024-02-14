@@ -1,10 +1,11 @@
 import { useSelector, useDispatch } from 'react-redux';
 import Breadcrumbs from "./Breadcrumbs";
 import { logoutUser } from '../../features/auth/auth-slice-actions';
+import { getFullName } from '../../utils/full-name';
 
 export default function Navbar() {
     const { userInfo } = useSelector((state) => state.auth);
-    const fullname = [userInfo.firstName, userInfo.middleName, userInfo.lastName].filter(x=>x).join(' ');
+    const fullname = getFullName(userInfo);
 
     const dispatch = useDispatch();
 

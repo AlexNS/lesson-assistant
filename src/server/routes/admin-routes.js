@@ -10,20 +10,18 @@ import Models from '../models/index.js';
 const opts = {}
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 opts.secretOrKey = AuthConfig.jwtSecret;
-opts.audience = 'la.alexns.pro';
 
 passport.use(new JwtStrategy(opts, (jwtPayload, done) => {
     Models.User.findOne({
         where: {id: jwtPayload.id}
     }).then(user => {
-        if (err) {
-            return done(err, false);
-        }
         if (user) {
             return done(null, user);
         } else {
             return done(null, false);
         }
+    }).catch(err => {
+        return done(err, false);
     });
 }));
 
@@ -69,8 +67,9 @@ router.post('/api/login', async (req, res) => {
 });
 
 
-router.get('/api/something', passport.authenticate('jwt', { session: false }), (req, res) => {
-
+router.get('/api/students', passport.authenticate('jwt', { session: false }), async (req, res) => {
+    const students = await Models.Student.findAll();
+    res.send(students);
 });
 
 export default router;
