@@ -19,7 +19,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 
 app.use(expressLayouts);
-app.use(express.static('public'));
+app.use('/a',express.static('public'));
 app.use('/p', express.static(UploadPath));
 app.use(bodyParser.urlencoded({extended: true}));
 
