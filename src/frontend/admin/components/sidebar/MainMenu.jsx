@@ -6,6 +6,7 @@ export default function MainMenu() {
             <ul className="flex flex-col pl-0 mb-0">
                 <MainMenuItem title='Информация' link='dashboard' />
                 <MainMenuItem title='Занятия' link='lessons' />
+                <MainMenuItem title='Вопросы' link='questions' />
                 <MainMenuItem title='Студенты' link='students' />
                 <MainMenuItem title='Курсы' link='courses' />
             </ul>

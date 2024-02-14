@@ -6,6 +6,7 @@ import AdminPage from './AdminPage';
 import LessonsScreen from './components/lessons-screen/LessonsScreen';
 import CoursesScreen from './components/courses-screen/CoursesScreen';
 import StudentsScreen from './components/students-screen/StudentsScreen';
+import QuestionsScreen from './components/questions-screen/QuestionsScreen';
 
 export default function App() {
   const { userToken } = useSelector((state) => state.auth);
@@ -47,6 +48,13 @@ export default function App() {
             element: <StudentsScreen />,
             handle: {
               title: 'Студенты'
+            }
+          },
+          {
+            path: "questions",
+            element: <QuestionsScreen />,
+            handle: {
+              title: 'Вопросы'
             }
           },
         ]

@@ -72,4 +72,12 @@ router.get('/api/students', passport.authenticate('jwt', { session: false }), as
     res.send(students);
 });
 
+router.get('/api/questions', passport.authenticate('jwt', { session: false }), async (req, res) => {
+    const questions = await Models.Question.findAll({
+        where: { resolved: false },
+        order: [ ['createdAt', 'DESC']] 
+    });
+    res.send(questions);
+});
+
 export default router;
