@@ -9,8 +9,10 @@
     "server:dev": "nodemon server.js",
     "client:dev": "vite",
     "dev": "concurrently \"npm run server:dev\" \"npm run client:dev\"",
-    "build-tailwind": "npx tailwindcss -i ./src/server/css/main.css -o ./src/static/theme.css",
-    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0"
+    "build-tailwind": "tailwindcss -i ./src/server/css/main.css -o ./src/static/theme.css",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "build": "npm run build-tailwind && vite build",
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
