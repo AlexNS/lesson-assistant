@@ -6,12 +6,14 @@ export default function StudentsTable() {
     const { data = [], isFetching } = useFetchStudentsQuery();
 
     const students = data.map(s => {
+        const photoPath = s.photo ? `/p/${s.photo}` : ''
+ 
         return <tr key={s.id}>
             <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                 <div className="flex px-2 py-1">
                     <div>
-                        <img src={`/p/${s.photo}`} className="inline-flex items-center justify-center mr-4 text-sm text-white transition-all duration-200 ease-soft-in-out h-9 w-9 rounded-xl" alt="user1" />
-                    </div>
+                        <img src={photoPath} className="inline-flex items-center justify-center mr-4 text-sm text-white transition-all duration-200 ease-soft-in-out h-9 w-9 rounded-xl" />
+                    </div>                    
                     <div className="flex flex-col justify-center">
                         <h6 className="mb-0 text-sm leading-normal">{getFullName(s)}</h6>
                         <p className="mb-0 text-xs leading-tight text-slate-400">{s.email}</p>

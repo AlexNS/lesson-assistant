@@ -19,7 +19,7 @@ const app = express();
 
 app.use(expressLayouts);
 app.use(express.static('public'));
-app.use('p', express.static(UploadPath));
+app.use('/p', express.static(UploadPath));
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.set('view engine', 'ejs');
