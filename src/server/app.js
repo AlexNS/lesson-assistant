@@ -10,6 +10,7 @@ import adminRoutes from  './routes/admin-routes.js';
 import registerRoutes from './routes/register-routes.js';
 import questionRoutes from './routes/question-routes.js';
 import attendanceRoutes from './routes/attendance-routes.js'
+import variantRoutes from './routes/variant-routes.js';
 
 import { UploadPath } from './config/config.js';
 
@@ -29,6 +30,7 @@ app.use(defaultRoutes);
 app.use(adminRoutes);
 app.use(registerRoutes);
 app.use(questionRoutes);
+app.use(variantRoutes);
 app.use(attendanceRoutes);
 
 export default app;
