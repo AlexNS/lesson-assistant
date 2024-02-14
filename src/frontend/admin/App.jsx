@@ -19,7 +19,7 @@ export default function App() {
 
   const router = createBrowserRouter([
     {
-        path: "/frontend-admin.html/",
+        path: "/admin",
         element: <AdminPage />,
         children: [
           {

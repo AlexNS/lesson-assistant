@@ -1,4 +1,7 @@
 import 'dotenv/config';
+import { createRequire } from "module";
+const require = createRequire(import.meta.url);
+const viteManifest = require("./manifest.json");
 
 export const DbConfig = {
     hostname: process.env['DB_HOSTNAME'] ?? 'localhost',
@@ -15,4 +18,7 @@ export const AuthConfig = {
 
 export const UploadPath = process.env['UPLOAD_PATH'] ?? './uploads';
 
+export const ResourcesConfig = {
+    AdminMainJsPath: viteManifest['frontend-admin.html']['file'] ?? 'main.js'
+}
 

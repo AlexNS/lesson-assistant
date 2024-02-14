@@ -1,0 +1,14 @@
+{
+  "frontend-admin.html": {
+    "assets": [
+      "curved6-ziPm47yq.jpg"
+    ],
+    "file": "frontend-admin-w3q7u5vl.js",
+    "isEntry": true,
+    "src": "frontend-admin.html"
+  },
+  "src/frontend/admin/assets/curved6.jpg": {
+    "file": "curved6-ziPm47yq.jpg",
+    "src": "src/frontend/admin/assets/curved6.jpg"
+  }
+}

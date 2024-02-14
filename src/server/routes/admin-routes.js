@@ -6,6 +6,7 @@ import bcrypt from 'bcrypt'
 import jwt from 'jwt-simple';
 
 import Models from '../models/index.js';
+import { main } from "../controllers/admin-controller.js";
 
 const opts = {}
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
@@ -28,9 +29,7 @@ passport.use(new JwtStrategy(opts, (jwtPayload, done) => {
 
 const router = Router();
 
-router.get('/admin*', (req, res) => {
-    res.render('admin');
-});
+router.get('/admin*', main);
   
 
 router.post('/api/login', async (req, res) => {
