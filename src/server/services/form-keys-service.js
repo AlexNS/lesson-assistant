@@ -48,8 +48,10 @@ export async function getLessonByFormKey(formKeyString, formType) {
 
 export async function getFormKeyByEntityId(formType, entityId) {
     const formKey = await Models.FormKey.findOne({
-      formType: formType,
-      entityId: entityId
+        where: {
+            formType: formType,
+            entityId: entityId
+        }
     });
 
     return formKey?.key;

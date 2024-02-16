@@ -39,7 +39,14 @@
 
     try {
       const position = await LaUtils.getGeoPositionAsync();
-      formElement.querySelector('[name=geoData]').value = JSON.stringify(position);
+      if (position) {
+        const obj = {
+          latitude: position.latitude,
+          longitude: position.longitude,
+          accuracy: position.accuracy
+        }
+        formElement.querySelector('[name=geoData]').value = JSON.stringify(obj);
+      }
     } catch(err) {
       console.error(err);
     }

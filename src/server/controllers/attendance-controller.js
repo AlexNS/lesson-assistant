@@ -23,7 +23,9 @@ export async function attendanceMark(req, res) {
     }
 
     const student = await Models.Student.findOne({
-      email: req.body.email
+      where: {
+        email: req.body.email
+      }
     });
     
     if (!student) {
@@ -31,9 +33,11 @@ export async function attendanceMark(req, res) {
       return;
     }
 
-    const existingSubmission = Models.AttendanceSubmission.findOne({
-      studentId: student.id,
-      lessonId: lesson.id
+    const existingSubmission = await Models.AttendanceSubmission.findOne({
+      where: {
+        studentId: student.id,
+        lessonId: lesson.id
+      }
     })
     
     if (!existingSubmission) {
