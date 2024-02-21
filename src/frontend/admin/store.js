@@ -4,6 +4,7 @@ import { authStoreMiddleware } from './features/auth/auth-store-middleware';
 import { loadAuth } from './features/auth/auth-persister';
 import { studentsApiSlice } from './features/students/students-api-slice';
 import { questionsApiSlice } from './features/questions/questions-api-slice';
+import { lessonsApiSlice } from './features/lessons/lessons-api-slice';
 
 const store = configureStore({
   preloadedState: {
@@ -12,13 +13,15 @@ const store = configureStore({
   reducer: {
     auth: authReducer,
     [studentsApiSlice.reducerPath]: studentsApiSlice.reducer,
-    [questionsApiSlice.reducerPath]: questionsApiSlice.reducer
+    [questionsApiSlice.reducerPath]: questionsApiSlice.reducer,
+    [lessonsApiSlice.reducerPath]: lessonsApiSlice.reducer,
   },
   middleware: (getDefaultMiddleware) => [
     ...getDefaultMiddleware(),
     authStoreMiddleware.middleware,
     studentsApiSlice.middleware,
     questionsApiSlice.middleware,
+    lessonsApiSlice.middleware
   ]
 })
 export default store;

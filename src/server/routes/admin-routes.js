@@ -7,6 +7,7 @@ import Models from '../models/index.js';
 import { main, login } from "../controllers/admin-controller.js";
 import * as students from '../controllers/admin/admin-students-controller.js';
 import * as questions from '../controllers/admin/admin-questions-controller.js';
+import * as lessons from '../controllers/admin/admin-lessons-controller.js';
 
 const opts = {}
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
@@ -43,6 +44,10 @@ router.route('/api/questions')
     .all(withAuth)
     .get(questions.get);
 
+router.route('/api/lessons')
+    .all(withAuth)
+    .get(lessons.get)
+    .post(lessons.create);
 
 
 export default router;

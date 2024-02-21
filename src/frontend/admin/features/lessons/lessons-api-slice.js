@@ -16,9 +16,21 @@ export const lessonsApiSlice = createApi({
         query() {
           return `/lessons`;
         },
+        providesTags: (result) => result ? result.map(({ id }) => ({ type: 'Lessons', id })) : [],
       }),
+      addLesson: builder.mutation({
+        query: ({title, date}) => ({
+          url: '/lessons',
+          method: 'POST',
+          body: {
+            title,
+            date
+          },
+        }),
+        invalidatesTags: ['Lessons']
+      })
     };
   },
 });
 
-export const { useFetchLessonsQuery } = lessonsApiSlice;
+export const { useFetchLessonsQuery, useAddLessonMutation } = lessonsApiSlice;
