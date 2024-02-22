@@ -18,3 +18,13 @@ export async function create(req, res) {
     });
     res.send(lesson);
 }
+
+export async function getSingle(req, res) {
+    const lesson = await Models.Lesson.findOne({
+        where: {
+            id: req.params.id
+        }
+    });
+
+    res.send(lesson);
+}

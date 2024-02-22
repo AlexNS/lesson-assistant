@@ -1,4 +1,5 @@
 import { useMatches } from "react-router-dom"
+import BreadcrumbsEntry from "./BreadcrumbsEntry";
 
 export default function Breadcrumbs() {
     const matches = useMatches();
@@ -6,11 +7,7 @@ export default function Breadcrumbs() {
     const markedMatches = matches.filter(m => m.handle);
 
     const bc = markedMatches
-        .map(m => {
-            const title = m.handle.title;
-            const link = m.pathname;
-            return <li key={link} className="text-sm pl-2 capitalize leading-normal text-slate-700 before:float-left before:pr-2 before:text-gray-600 before:content-['/']" aria-current="page">{title}</li>
-        });
+        .map(m => (<BreadcrumbsEntry handle={m.handle} pathname={m.pathname} />));
 
     const title = markedMatches.length > 0 ? markedMatches[markedMatches.length - 1].handle.title : '';
     return (
@@ -23,7 +20,6 @@ export default function Breadcrumbs() {
             </ol>
 
             <h6 className="mb-0 font-bold capitalize">{title}</h6>
-            
         </nav>
     )
 }

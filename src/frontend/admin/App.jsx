@@ -8,6 +8,7 @@ import CoursesScreen from './components/courses-screen/CoursesScreen';
 import StudentsScreen from './components/students-screen/StudentsScreen';
 import QuestionsScreen from './components/questions-screen/QuestionsScreen';
 import LessonScreenCreate from './components/lessons-screen/LessonScreenCreate';
+import LessonScreenAttendance from './components/lessons-screen/LessonScreenAttendance';
 
 export default function App() {
   const { userToken } = useSelector((state) => state.auth);
@@ -32,17 +33,37 @@ export default function App() {
           },
           {
             path: "lessons",
-            element: <LessonsScreen />,
             handle: {
               title: 'Занятия'
-            }
+            },
+            children: [
+              {
+                path: '',
+                element: <LessonsScreen />,
+              },
+              {
+                path: "create",
+                element: <LessonScreenCreate />,
+                handle: {
+                  title: 'Создание занятия'
+                }
+              }
+            ]
           },
           {
-            path: "lessons/create",
-            element: <LessonScreenCreate />,
+            path: "lessons/:id",
             handle: {
-              title: 'Занятия'
-            }
+              isLesson: true,
+            },
+            children: [
+              {
+                path: 'attendance',
+                element: <LessonScreenAttendance />,
+                handle: {
+                  title: 'Посещение'
+                }
+              }
+            ]
           },
           {
             path: "courses",

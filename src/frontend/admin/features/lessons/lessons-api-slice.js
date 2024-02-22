@@ -10,7 +10,18 @@ export const lessonsApiSlice = createApi({
         query() {
           return `/lessons`;
         },
-        providesTags: (result) => result ? result.map(({ id }) => ({ type: 'Lessons', id })) : [],
+        providesTags: (result) => result
+          ? [
+              ...result.map(({ id }) => ({ type: 'Lesson', id })),
+              { type: 'Lesson', id: 'LIST' },
+            ]
+          : [{ type: 'Lesson', id: 'LIST' }],
+      }),
+      getLesson: builder.query({
+        query(id) {
+          return `/lessons/${id}`;
+        },
+        providesTags: (result, error, id) => [{ type: 'Lesson', id }],
       }),
       addLesson: builder.mutation({
         query: ({title, date, course}) => ({
@@ -22,10 +33,10 @@ export const lessonsApiSlice = createApi({
             courseId: course
           },
         }),
-        invalidatesTags: ['Lessons']
+        invalidatesTags: [{ type: 'Post', id: 'LIST' }],
       })
     };
   },
 });
 
-export const { useFetchLessonsQuery, useAddLessonMutation } = lessonsApiSlice;
+export const { useFetchLessonsQuery, useAddLessonMutation, useGetLessonQuery } = lessonsApiSlice;
