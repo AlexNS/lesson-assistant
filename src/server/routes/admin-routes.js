@@ -8,6 +8,7 @@ import { main, login } from "../controllers/admin-controller.js";
 import * as students from '../controllers/admin/admin-students-controller.js';
 import * as questions from '../controllers/admin/admin-questions-controller.js';
 import * as lessons from '../controllers/admin/admin-lessons-controller.js';
+import * as courses from '../controllers/admin/admin-courses-controller.js';
 
 const opts = {}
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
@@ -49,5 +50,8 @@ router.route('/api/lessons')
     .get(lessons.get)
     .post(lessons.create);
 
+router.route('/api/courses')
+    .all(withAuth)
+    .get(courses.get);
 
 export default router;

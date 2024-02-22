@@ -9,8 +9,6 @@ export async function get(req, res) {
 }
 
 export async function create(req, res) {
-    console.log(req.body);
-
     const date = parseISO(req.body.date);
 
     const lesson = await Models.Lesson.create({

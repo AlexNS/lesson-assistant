@@ -1,47 +1,74 @@
-import { useAddLessonMutation } from "../../features/lessons/lessons-api-slice";
-import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { format } from 'date-fns';
+import { useAddLessonMutation } from '../../features/lessons/lessons-api-slice';
+import { useFetchCoursesQuery } from '../../features/courses/courses-api-slice';
+import { useGoBack } from '../../utils/go-back';
 
 export default function LessonScreenCreate() {
+    const { data: coursesData  = [] } = useFetchCoursesQuery();
+    const [ createLesson, { isLoading } ] = useAddLessonMutation();
 
-    const [ createLesson, result ] = useAddLessonMutation();
-    const [ title, setTitle ] = useState('');
-    const [ date, setDate ] = useState(new Date());
+    const goBack = useGoBack();
+    const returnBack = () => goBack({fallBack: '/admin/lessons'});
+    
+    const dt = format(new Date(), "yyyy-MM-dd'T'hh:mm");
 
-    const handleCreateLesson = () => {
-        createLesson({title, date});
-    }
+    const { register, handleSubmit, reset } = useForm({
+        defaultValues: {
+          title: '',
+          date: dt,
+          course: 0
+        },
+      })
 
-    const handleTitleChange = (e) => setTitle(e.target.value);
-    const handleDateChange = (e) => setDate(e.target.value);
+    const onSubmit = async (data) =>{
+        if (isLoading) {
+            return
+        }
+        await createLesson(data).unwrap();
+        reset({
+            title: '',
+            date: dt,
+            course: 0
+        });
+
+        returnBack();
+    } 
+    
+    const courses = coursesData?.map(c => (
+        <option value={c.id}>{c.name}</option>
+    ));
 
     return (
-        <form id="lesson-form">
+        <form id="lesson-form" onSubmit={handleSubmit(onSubmit)}>
             <div
-                class="relative flex flex-col break-words bg-white border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border m-4 p-8 max-w-lg"
+                className="relative flex flex-col break-words bg-white border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border m-4 p-8 max-w-lg"
             >
-                <h1 class="mb-6">Создание занятия</h1>
+                <h1 className="mb-6">Создание занятия</h1>
 
                 <input
                     type="text"
-                    class="default-input mb-4"
+                    className="default-input mb-4"
                     placeholder="Название"
-                    name="title"
-                    value={title}
-                    onChange={handleTitleChange}
                     required
+                    {...register("title")}
                 />
 
                 <input
                     type="datetime-local"
-                    class="default-input mb-4"
+                    className="default-input mb-4"
                     placeholder="Дата"
-                    name="date"
-                    value={date}
-                    onChange={handleDateChange}
                     required
+                    {...register("date")}
                 />
 
-                <button type="button" class="btn-primary" onClick={handleCreateLesson}>Создать</button>
+                <select className="default-input mb-4" {...register("course", {min: 1})}>
+                    <option value={0}>-- Курс --</option>
+                    {courses}
+                </select>
+
+                <button type="submit" className="btn-primary" disabled={isLoading}>Создать</button>
+                <button onClick={returnBack} >Отмена</button>
             </div>
         </form>
     );

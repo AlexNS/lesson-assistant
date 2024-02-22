@@ -1,15 +1,9 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi } from '@reduxjs/toolkit/query/react';
+import { getApiBaseQuery } from '../utils';
 
 export const lessonsApiSlice = createApi({
   reducerPath: 'apiLessons',
-  baseQuery: fetchBaseQuery({
-    baseUrl: '/api',
-    prepareHeaders(headers, { getState }) {
-      const { auth: { userToken } } = getState()
-      headers.set('Authorization', `Bearer ${userToken}`);
-      return headers;
-    },
-  }),
+  baseQuery: getApiBaseQuery(),
   endpoints(builder) {
     return {
       fetchLessons: builder.query({
@@ -19,12 +13,13 @@ export const lessonsApiSlice = createApi({
         providesTags: (result) => result ? result.map(({ id }) => ({ type: 'Lessons', id })) : [],
       }),
       addLesson: builder.mutation({
-        query: ({title, date}) => ({
+        query: ({title, date, course}) => ({
           url: '/lessons',
           method: 'POST',
           body: {
             title,
-            date
+            date,
+            courseId: course
           },
         }),
         invalidatesTags: ['Lessons']

@@ -1,15 +1,9 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi } from '@reduxjs/toolkit/query/react';
+import { getApiBaseQuery } from '../utils';
 
 export const questionsApiSlice = createApi({
   reducerPath: 'apiQuestions',
-  baseQuery: fetchBaseQuery({
-    baseUrl: '/api',
-    prepareHeaders(headers, { getState }) {
-      const { auth: { userToken } } = getState()
-      headers.set('Authorization', `Bearer ${userToken}`);
-      return headers;
-    },
-  }),
+  baseQuery: getApiBaseQuery(),
   endpoints(builder) {
     return {
       fetchQuestions: builder.query({

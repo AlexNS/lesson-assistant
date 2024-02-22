@@ -1,18 +1,18 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { getApiBaseQuery } from '../utils';
 
-export const studentsApiSlice = createApi({
-  reducerPath: 'apiStudents',
+export const coursesApiSlice = createApi({
+  reducerPath: 'apiCourses',
   baseQuery: getApiBaseQuery(),
   endpoints(builder) {
     return {
-      fetchStudents: builder.query({
+      fetchCourses: builder.query({
         query() {
-          return `/students`;
+          return `/courses`;
         },
       }),
     };
   },
 });
 
-export const { useFetchStudentsQuery } = studentsApiSlice;
+export const { useFetchCoursesQuery } = coursesApiSlice;

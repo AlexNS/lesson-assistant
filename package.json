@@ -12,7 +12,9 @@
     "build-tailwind": "tailwindcss -i ./src/server/css/main.css -o ./src/static/theme.css",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "build": "npm run build-tailwind && vite build",
-    "start": "node server.js"
+    "start": "node server.js",
+    "nodemon-back": "nodemon ./server.js --ignore ./src/frontend",
+    "nodemon-front": "nodemon -e js,jsx --watch ./src/frontend --exec 'npx vite build'"
   },
   "author": "",
   "license": "ISC",
@@ -34,6 +36,7 @@
     "pg-hstore": "^2.3.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.50.1",
     "react-redux": "^9.1.0",
     "react-router-dom": "^6.22.0",
     "sequelize": "^6.36.0",
