@@ -54,6 +54,10 @@ router.route('/api/lessons/:id')
     .all(withAuth)
     .get(lessons.getSingle);
 
+router.route('/api/lessons/:id/attendance')
+    .all(withAuth)
+    .get(lessons.getAttendance);
+    
 
 router.route('/api/courses')
     .all(withAuth)

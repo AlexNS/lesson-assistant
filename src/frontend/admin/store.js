@@ -6,6 +6,7 @@ import { studentsApiSlice } from './features/students/students-api-slice';
 import { questionsApiSlice } from './features/questions/questions-api-slice';
 import { lessonsApiSlice } from './features/lessons/lessons-api-slice';
 import { coursesApiSlice } from './features/courses/courses-api-slice';
+import { attendanceApiSlice } from './features/attendance/attendance-api-slice';
 
 const store = configureStore({
   preloadedState: {
@@ -17,6 +18,7 @@ const store = configureStore({
     [questionsApiSlice.reducerPath]: questionsApiSlice.reducer,
     [lessonsApiSlice.reducerPath]: lessonsApiSlice.reducer,
     [coursesApiSlice.reducerPath]: coursesApiSlice.reducer,
+    [attendanceApiSlice.reducerPath]: attendanceApiSlice.reducer,
   },
   middleware: (getDefaultMiddleware) => [
     ...getDefaultMiddleware(),
@@ -24,7 +26,8 @@ const store = configureStore({
     studentsApiSlice.middleware,
     questionsApiSlice.middleware,
     lessonsApiSlice.middleware,
-    coursesApiSlice.middleware
+    coursesApiSlice.middleware,
+    attendanceApiSlice.middleware
   ]
 })
 export default store;

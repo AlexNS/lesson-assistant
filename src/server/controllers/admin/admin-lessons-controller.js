@@ -28,3 +28,15 @@ export async function getSingle(req, res) {
 
     res.send(lesson);
 }
+
+export async function getAttendance(req, res) {
+    const submissions = await Models.AttendanceSubmission.findAll({
+        where: {
+            lessonId: req.params.id
+        }
+    });
+
+    console.log(submissions);
+
+    res.send(submissions);
+}
