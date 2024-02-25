@@ -56,7 +56,8 @@ router.route('/api/lessons/:id')
 
 router.route('/api/lessons/:id/attendance')
     .all(withAuth)
-    .get(lessons.getAttendance);
+    .get(lessons.getAttendance)
+    .post(lessons.manualAttendance);
     
 
 router.route('/api/courses')

@@ -31,12 +31,64 @@ export async function getSingle(req, res) {
 
 export async function getAttendance(req, res) {
     const submissions = await Models.AttendanceSubmission.findAll({
+        include: [{
+            model: Models.Student,
+            as: 'student'
+        }],
         where: {
             lessonId: req.params.id
         }
     });
 
-    console.log(submissions);
-
     res.send(submissions);
+}
+
+export async function manualAttendance(req, res) {
+    const lessonId = req.params.id;
+    const email = req.body.email;
+
+    const lesson = await Models.Lesson.findOne({
+        where: {
+            id: lessonId
+        },
+        include: {
+            model: Models.Course,
+            as: 'course'
+        }
+    });
+
+    if (!lesson) {
+        return res.sendStatus(400);
+    }
+
+    const student = await Models.Student.findOne({
+        where: {
+            email: email,
+            courseId: lesson.courseId
+        }
+    });
+
+    if (!student) {
+        res.send(`Student not found in course ${lesson.course.name}`);
+        return res.sendStatus(400);
+    }
+
+    const existingSubmission = await Models.AttendanceSubmission.findOne({
+        where: {
+            studentId: student.id,
+            lessonId    
+        }
+    });
+
+    if (existingSubmission) {
+        return res.send(existingSubmission);
+    }
+    
+    const submission = await Models.AttendanceSubmission.create({
+        studentId: student.id,
+        visitorId: 'manual entry',
+        lessonId,
+        geoData: ''
+    });
+    res.send(submission);
 }

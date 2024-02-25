@@ -9,6 +9,8 @@ import StudentsScreen from './components/students-screen/StudentsScreen';
 import QuestionsScreen from './components/questions-screen/QuestionsScreen';
 import LessonScreenCreate from './components/lessons-screen/LessonScreenCreate';
 import LessonScreenAttendance from './components/lessons-screen/LessonScreenAttendance';
+import LessonScreenAttendanceManual from './components/lessons-screen/LessonScreenAttendanceManual';
+import LessonScreenAttendanceTable from './components/lessons-screen/LessonScreenAttendanceTable';
 
 export default function App() {
   const { userToken } = useSelector((state) => state.auth);
@@ -61,7 +63,20 @@ export default function App() {
                 element: <LessonScreenAttendance />,
                 handle: {
                   title: 'Посещение'
-                }
+                },
+                children: [
+                  {
+                    path: '',
+                    element: <LessonScreenAttendanceTable />,
+                  },
+                  {
+                    path: 'manual',
+                    element: <LessonScreenAttendanceManual />,
+                    handle: {
+                      title: 'Отметка вручную'
+                    }
+                  }
+                ]
               }
             ]
           },

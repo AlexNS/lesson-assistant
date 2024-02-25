@@ -12,7 +12,7 @@ export default (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      this.belongsTo(models.Student, { foreignKey: 'studentId' });
+      this.belongsTo(models.Student, { foreignKey: 'studentId', as: 'student' });
     }
   }
   AttendanceSubmission.init({
