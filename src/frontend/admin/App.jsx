@@ -11,6 +11,7 @@ import LessonScreenCreate from './components/lessons-screen/LessonScreenCreate';
 import LessonScreenAttendance from './components/lessons-screen/LessonScreenAttendance';
 import LessonScreenAttendanceManual from './components/lessons-screen/LessonScreenAttendanceManual';
 import LessonScreenAttendanceTable from './components/lessons-screen/LessonScreenAttendanceTable';
+import LessonScreenAttendanceQr from './components/lessons-screen/LessonScreenAttendanceQr';
 
 export default function App() {
   const { userToken } = useSelector((state) => state.auth);
@@ -74,6 +75,13 @@ export default function App() {
                     element: <LessonScreenAttendanceManual />,
                     handle: {
                       title: 'Отметка вручную'
+                    }
+                  },
+                  {
+                    path: 'qr',
+                    element: <LessonScreenAttendanceQr />,
+                    handle: {
+                      title: 'QR отметка посещения'
                     }
                   }
                 ]

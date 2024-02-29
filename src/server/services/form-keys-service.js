@@ -32,14 +32,14 @@ export async function getCourseByFormKey(formKeyString, formType) {
     return null;
 }
 
-export async function getLessonByFormKey(formKeyString, formType) {
+export async function getLessonByFormKey(formKeyString, formType, onlyActive=false) {
     if (lessonForms.indexOf(formType) == -1) {
         throw new Error(`Form type ${formType} provided should not have Lesson associated with it`);
     }
 
     const formKey = await getFormKey(formKeyString, formType);
 
-    if (formKey) {
+    if (formKey && (!onlyActive || formKey.active)) {
         return await Models.Lesson.findByPk(formKey.entityId);
     }
 

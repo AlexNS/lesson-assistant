@@ -32,6 +32,7 @@ export default function LessonScreenAttendanceTable() {
         <>   
             <div className="flex flex-row justify-end">
                 <NavLink to='manual' className="btn-primary mr-1">Отметить вручную</NavLink>
+                <NavLink to='qr' className="btn-primary mr-1">QR Код</NavLink>
             </div>
             <table className="items-center w-full mb-0 align-top border-gray-200 text-slate-500">
                 <thead className="align-bottom">

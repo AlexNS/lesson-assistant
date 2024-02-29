@@ -59,6 +59,15 @@ router.route('/api/lessons/:id/attendance')
     .get(lessons.getAttendance)
     .post(lessons.manualAttendance);
     
+router.route('/api/lessons/:id/attendance-form')
+    .all(withAuth)
+    .get(lessons.getAttendanceFormInfo)
+    .post(lessons.createAttendanceForm);
+
+router.route('/api/lessons/:id/attendance-form/:status')
+    .all(withAuth)
+    .post(lessons.setAttendanceFormActiveStatus);
+
 
 router.route('/api/courses')
     .all(withAuth)
