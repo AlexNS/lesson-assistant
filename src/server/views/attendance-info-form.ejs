@@ -1,0 +1,32 @@
+<main className="mt-0 transition-all duration-200 ease-soft-in-out">
+  <div class="w-full flex justify-center">
+    <form id="attendance-info-form" method="POST">
+      <div
+        class="relative flex flex-col break-words bg-white border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border m-4 p-8 max-w-lg"
+      >
+        <h1 class="mb-6">Информация об отметках присутствия</h1>
+        <input type="email" name="email" placeholder="Ваш email" required class="mb-4"/>
+        <button type="submit" class="btn-primary">Просмотреть</button>
+      </div>
+    </form>
+  </div>
+</main>
+<script src="/a/utils.js"></script>
+<script>
+  (() => {
+    const formElement = document.getElementById('attendance-info-form');
+    const emailElement = formElement.querySelector('[name=email]');
+    emailElement.value = LaUtils.getEmailFromStorage();
+
+    formElement.addEventListener('submit', (e) => {
+      if (!LaUtils.isSfeduEmail(emailElement.value)) {
+          alert('Email должен быть в домене sfedu.ru');
+          return LaUtils.noSubmit(e);
+      }
+
+      if (emailElement?.value) {
+        LaUtils.saveEmailInStorage(emailElement?.value);
+      }
+    });
+  })(); 
+</script>
